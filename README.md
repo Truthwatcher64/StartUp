@@ -13,7 +13,7 @@ them to compare their score with others. The current game name is Mariachi Runne
 
 ### Design
 
-This Shows the design of the three pages with their relative layouts.
+This shows the design of the three pages that will be used with their relative layouts.
 
 ![Mock](Design2.jpg)
 
