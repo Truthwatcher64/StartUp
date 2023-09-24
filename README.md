@@ -5,15 +5,14 @@
 
 
 ### Elevator Pitch
-This is going to be like the dino game that works on chrome when you don't
- have an internet connection except for better. It will be comparable to an ultimate mode 
-of the game with more difficulty and obstacles. It will be able to save a user's
-score and allow them to compare their score with others. It will also have more
-obstacles and a different design for the character.  The current 
-game name is Mariachi Runner. 
+This is going to be like the dino game that works on chrome, but better. The base level 
+game is fun, but it lacks a few key elements that would make it great. This upgrade will be 
+comparable to an ultimate mode of the game with more difficulty and obstacles. 
+Besides having more content it will also be able to save a user's score and allow 
+them to compare their score with others. The current game name is Mariachi Runner. 
 
 ### Design
-![Mock](Design.jpg)
+![Mock](Design2.jpg)
 
 ![Mock](BackEnd.jpg)
 
