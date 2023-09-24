@@ -12,8 +12,12 @@ Besides having more content it will also be able to save a user's score and allo
 them to compare their score with others. The current game name is Mariachi Runner. 
 
 ### Design
+
+This Shows the design of the three pages with their relative layouts.
 ![Mock](Design2.jpg)
 
+This shows aproximately what data moves from the user to server and what is stored in the database. \
+This is even more of an approimation than the frontend design as much of this may change. 
 ![Mock](BackEnd.jpg)
 
 ### Key Features
@@ -27,13 +31,13 @@ them to compare their score with others. The current game name is Mariachi Runne
 I am going to use the required technologies in the following ways.
 
 - HTML - Uses HTML structure for application. Three HTML pages. One for playing the game, one for looking at scores, and one with about info.
-- CSS - Application styling that looks good on different screen sizes; use simple, but clear graphics and fonts; Design focuses user of the game.
-- JavaScript - Provides the majority of the functionality and animations for the game. 
+- CSS - Application styling that looks good on different screen sizes; use simple, but clear graphics and fonts; Design focuses user on the game.
+- JavaScript - Provides the majority of the functionality and animations for the game. Also allows for clickable buttons on all pages. 
 - Service - Back end service with endpoints for:
     - login
     - retrieving scores of the logged in person
     - retrieving the highest scores logged
-- DB - Store users and scores in the database.
+- DB - Store users and scores in the database. Has a table for each user and a table with the highest scores.
 - Login - Register and login users. Credentials securely stored in database. Cannot save score unless logged in. 
 - WebSocket - When a user logs in they get a message of the current highest score and the highest score of the next person with a challenge to beat them. 
 - React - Application will be ported to use the React web framework.
@@ -41,13 +45,9 @@ I am going to use the required technologies in the following ways.
 
 ## HTML Deliverable
 
-
-
 ## CS Deliverable
 
-
 ## JavaScript Deliverable
-
 
 ## Service Deliverable
 
