@@ -14,10 +14,12 @@ them to compare their score with others. The current game name is Mariachi Runne
 ### Design
 
 This Shows the design of the three pages with their relative layouts.
+
 ![Mock](Design2.jpg)
 
-This shows aproximately what data moves from the user to server and what is stored in the database. \
+This shows aproximately what data moves from the user to server and what is stored in the database. 
 This is even more of an approimation than the frontend design as much of this may change. 
+
 ![Mock](BackEnd.jpg)
 
 ### Key Features
