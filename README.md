@@ -46,6 +46,16 @@ I am going to use the required technologies in the following ways.
 
 
 ## HTML Deliverable
+I built out the structure of my application using HTML.
+
+- HTML pages - Four HTML pages that have a login page, game page, scores page, and about page.
+- Links - The login page automatically links to the game page. Each page can also link to any of the other three from the links in the header. 
+- Text - Each of the voting choices is represented by a textual description.
+- Images - Added a canvas image that will be used for the game, currently is blank without javascript. Added jpg of Mariachi on About page. 
+- Login - Input box and submit button on the login page. Also is on the scores page.
+- Database - There are two tables on the scores page one pulling the users data from the database and the other pulling the highest scores. 
+- WebSocket - A popup message appears whenever the games page is opened telling the user what the next high score to beat is. 
+
 
 ## CS Deliverable
 
