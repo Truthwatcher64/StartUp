@@ -54,7 +54,8 @@ I built out the structure of my application using HTML.
 - Images - Added a canvas image that will be used for the game, currently is blank without javascript. Added jpg of Mariachi to About page. 
 - Login - Input box and submit button on the login page. Also is on the scores page.
 - Database - There are two tables on the scores page one pulling the users data from the database and the other pulling the highest scores. 
-- WebSocket - A popup message appears whenever the games page is opened telling the user what the next high score to beat is. 
+- WebSocket - Added a stand in for the popup message that appears whenever the games page is opened telling the user what the next high score to beat is.
+- Third Party - There is a photo on the opening page that when third party interactions are incorporated will switch every time it loads. 
 
 
 ## CS Deliverable
