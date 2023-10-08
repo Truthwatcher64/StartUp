@@ -1,0 +1,16 @@
+header{
+    flex: 1 80px;
+    font-size: 20px;
+    background-color: blue;
+
+}
+body{
+    flex: 10;
+    color: black;
+}
+footer{
+    flex: 0 30px;
+    color: white;
+    font-size: 12px;
+    background-color: gray;
+}
