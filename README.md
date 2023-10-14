@@ -9,7 +9,7 @@ This is going to be like the dino game that works on chrome, but better. The bas
 game is fun, but it lacks a few key elements that would make it great. This upgrade will be 
 comparable to an ultimate mode of the game with more difficulty and obstacles. 
 Besides having more content it will also be able to save a user's score and allow 
-them to compare their score with others. The current game name is Mariachi Runner. 
+them to compare their score with others. The current game name is Raptor Run. 
 
 ### Design
 
@@ -59,6 +59,13 @@ I built out the structure of my application using HTML.
 
 
 ## CS Deliverable
+I added style to the pages with CSS.
+
+- Added color into the pages
+- Menu bar looks much better and is completely usable
+- Formatting on all pages is better
+- Fonts are consistent
+- Used flex to make sure the page looks good on any screen. 
 
 ## JavaScript Deliverable
 
