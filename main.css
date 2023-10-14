@@ -213,3 +213,17 @@ form{
     }
   }
 }
+
+
+.fixed_headers {
+  width: 250px;
+  table-layout: fixed;
+  
+  th { text-decoration: underline;
+  padding-bottom: 10px; }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+  
+}
