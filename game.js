@@ -3,6 +3,9 @@ window.addEventListener('load', function(){
     const ctx = canvas.getContext('2d');
     canvas.width=900;
     canvas.height=600;
+    let allObstacles = []
+    let score=0;
+    gameover=false;
 
     class InputHandler{
         constructor(){
@@ -30,35 +33,77 @@ window.addEventListener('load', function(){
         constructor(gamewidth, gameheight){
             this.gamewidth = gamewidth;
             this.gameheight = gameheight;
-            this.width = 200;
-            this.height = 200;
+            this.width = 150;
+            this.height = 150;
             this.x = 0;
             this.y = this.gameheight - this.height;
-            this.image= document.getElementById('raptorImage')
+            this.image= document.getElementById('raptorImage');
+            this.image2= document.getElementById('raptorImage2');
+            this.frameX=0;
+            this.maxFrame=31;
             this.speed=0;
-            this.gravity=2;
+            this.gravity=1;
             this.velY=0;
+            this.fps=20;
+            this.frameTimer=0;
+            this.frameChangeInterval = 1000/this.fps;
+
         }
         draw(context){
             //context.fillStyle = 'blue';
             //context.fillRect(this.x, this.y, this.width, this.height,)
-            context.drawImage(this.image, this.x-100, this.y, this.width+100, this.height)
+            if(this.frameX < 15){
+                context.drawImage(this.image, this.x-100, this.y, this.width+100, this.height)
+            }  
+            else{
+                context.drawImage(this.image2, this.x-100, this.y, this.width+100, this.height);
+            }
+            context.strokeStyle='transparent';
+            // context.beginPath();
+            // context.arc(this.x+this.width/2, this.y+this.height/2, this.width/2, 0, Math.PI*2);
+            // context.stroke();
+            // context.beginPath();
+            context.beginPath();
+            context.arc(this.x+this.width*.4, this.y+this.height*.7, this.width/3.5, 0, Math.PI*2);
+            context.stroke();
+            context.arc(this.x+this.width*.6, this.y+this.height*.25, this.width/3.5, 0, Math.PI*2);
+            context.stroke();
+            context.arc(this.x+this.width*.2, this.y+this.height*.35, this.width/5, 0, Math.PI*2);
+            context.stroke();
         }
-        update(input){
-            this.x += this.speed;
-            // setTimeout(()=>{
-            //     this.image=document.getElementById("raptorIamge2");
-            // }, 1000);
-            
+        update(input, deltaTime, allObstacles){
+            allObstacles.forEach(obstacle => {
+                const dx=obstacle.x - this.x;
+                const dy=obstacle.y - this.y;
+                const dis=Math.sqrt(dx*dx + dy*dy);
+                if(dis< (obstacle.width/2 + this.width/2)){
+                    gameover=true;
+                }
+            });
 
+            if(this.frameTimer > this.frameChangeInterval){
+                if(this.frameX <= this.maxFrame){
+                    this.frameX++;
+                }
+                else{
+                    this.frameX=0;
+                }
+            }
+            else{
+                this.frameTimer += deltaTime;
+            }
+            
+            this.x += this.speed;
+            
+        
             if(input.keys.indexOf('ArrowRight') > -1){
-                this.speed=5;
+                this.speed=6;
             }
             else if(input.keys.indexOf('ArrowLeft') > -1){
-                this.speed=-5;
+                this.speed=-6;
             }
             else if(input.keys.indexOf('ArrowUp') > -1 && this.onGround()){
-                this.velY =-30;
+                this.velY =-28;
             }
             else{
                 this.speed=0;
@@ -109,35 +154,87 @@ window.addEventListener('load', function(){
         constructor(gamewidth, gameheight){
             this.gamewidth=gamewidth;
             this.gameheight=gameheight;
-            this.width = 100;
-            this.height = 100;
-            this.image =document.getElementById('obstacle');
+            let randomSize= Math.random() * 100 + 50;
+            this.width = randomSize;
+            this.height = randomSize;
+            this.image =document.getElementById('rock');
+            this.x=this.gamewidth
+            this.y=this.gameheight-this.height;
+            this.speed=2;
+            let markedForDeletion=false;
         }
         draw(context){
-            context.drawImage(this.image);
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+            context.strokeStyle='transparent';
+            context.beginPath();
+            let modifier=this.height-this.height*.7;
+            context.strokeRect(this.x, this.y+modifier, this.width, this.height*.7);
+        }
+        update(){
+            this.x -= this.speed;
+            if(this.x < 0-this.width){
+                this.markedForDeletion=true;
+            }
         }
 
     }
 
-    function handleObstacle(){
-
+    
+    function handleObstacle(deltaTime){
+        if(obstacleTimer > (obstacleInterval + randomInterval)){
+            allObstacles.push(new Obstacle(canvas.width, canvas.height));
+            obstacleTimer=0;
+            randomInterval= Math.random()*1500+500;
+        }
+        else{
+            obstacleTimer+=deltaTime;
+        }
+        allObstacles.forEach(obstacle => {
+            obstacle.draw(ctx);
+            obstacle.update();
+        });
+        allObstacles=allObstacles.filter(obstacle => !obstacle.markedForDeletion);
+        
     }
 
-    function displayText(){
-
+    function displayText(context){
+        context.filstyle= 'black';
+        context.font='40px Arial';
+        context.fillText('Score: '+score.toFixed(0), 20, 50);
+        if(gameover){
+        context.filstyle= 'black';
+        context.font='40px Arial';
+        context.textAlign='center';
+        context.fillText('Game Over', canvas.width/2, 100)
+        context.fillText('Score: '+score.toFixed(0), canvas.width/2, 200);
+        }
     }
+
+
     const input = new InputHandler();
     const player = new Player(canvas.width, canvas.height);
     const background=new Background(canvas.width, canvas.height);
+    
+    let lastTime=0;
+    let obstacleTimer=0;
+    let obstacleInterval=1500;
+    let randomInterval= Math.random() * 2000 + 500;
 
-    function animate(){
+    function animate(timeStamp){
+        const deltaTime = timeStamp - lastTime;
+        lastTime=timeStamp;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         background.draw(ctx);
+        handleObstacle(deltaTime);
         player.draw(ctx);
-        player.update(input);
+        player.update(input, deltaTime, allObstacles);
+        displayText(ctx);
+        score=score+.05;
+        if(!gameover){
         requestAnimationFrame(animate);
+        }
     }
-    animate();
+    animate(0);
 
 
 
