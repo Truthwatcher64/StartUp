@@ -2,8 +2,33 @@
 
 @import "compass";
 
+#canvasDemo {
+  background: transparent;
+
+  top: 50%;
+  left: 50%;
+  
+  border: 5px solid white;
+}
+#background {
+  background-color: aquamarine;
+  display: none;
+}
+
+#raptorImage, #raptorImage2 {
+  display: none;
+}
+
 /* BASE */
-html, body {
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+  line-height: 1.4;
+  height: 100%;
+
+  /*background-color: black;*/
+}
+body{
   font-family: 'Roboto', sans-serif;
   font-size: 1em;
   line-height: 1.4;
@@ -12,6 +37,10 @@ html, body {
   margin: 0;
   padding: 0;
 }
+.bodyTemp{
+  margin: 10;
+}
+
 p{
   padding-left: 10px;
 }
@@ -27,6 +56,7 @@ a {
 main{
     flex-direction: vertical;
     flex: 10;
+    
 }
 footer{
     flex-direction: column;
