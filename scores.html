@@ -22,16 +22,17 @@
         <!--Sign in box-->
         <form>
             <label for="login" class="shift-down">Username</label>
-            <input type="text" id="login" name="login"><br>
-            <input type="submit" id="submitButton" class="custom-btn-scores-page"><br>
+            <input type="text" id="name"><br>
+            <button id="submitButton" class="custom-btn-scores-page" onclick="login()"></button>
+                <br>
         </form>
     </nav>
     <p>
 
     </p>
-    <div class="scores_header">Best Scores of All Time</div>
+    <div id='userScores-table' class="scores_header">Best Scores of All Time</div>
     <!--Personal Scores-->
-    <table class="fixed_headers">
+    <table id='userScores-table-rows' class="fixed_headers">
         <tr>
             <th>1</th>
             <td>360</td>
@@ -52,8 +53,8 @@
             <th>5</th>
             <td>130</td>
         </tr>
-        </table>
-        <div class="scores_header">Best Scores of All Time</div>
+    </table>
+    <div id="allScores-table" class="scores_header">Best Scores of All Time<div>
         <!--Best scores, pulled from server-->
         <table class="fixed_headers">
             <tr>
@@ -76,8 +77,10 @@
                 <th>5</th>
                 <td>430</td>
             </tr>
-            </table>
-    </table>
+        </table>
+    </div>
+    <script src="scoresStorage.js"></script>
+    <script src="loginButton.js"></script>
 </body>
 </main>
 <footer>
