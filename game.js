@@ -1,4 +1,51 @@
+window.addEventListener('load', loadNotification());
 
+function loadNotification(){
+    let holder = document.getElementById('notification-high-score');
+    let temp = getHighestScore();
+    if(temp === 'Play the Game'){
+        holder.innerHTML = '<h4>Play The Game</h4>'
+    }
+    else{
+        holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>'
+    }
+}
+
+function getHighestScore(){
+    if(localStorage.getItem('userName')){
+        let scoresText = localStorage.getItem('leaderScores');
+        if (scoresText) {
+            leaderScores = JSON.parse(scoresText);
+        }
+        scoresText = localStorage.getItem('scores')
+        if (scoresText) {
+            scores = JSON.parse(scoresText);
+            let tempScore= leaderScores[0];
+            for(let score in leaderScores){
+                if(score[0]<score){
+                    tempScore=score;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        else{
+            console.log(leaderScores[4].scores)
+            return leaderScores[4].score;
+        }
+        if(tempScore == leaderScores[0]){
+            console.log("You have the Highest Score")
+            return "You have the Highest Score";
+        }
+        console.log(tempScore.score);
+        return tempScore.score;
+    }
+    else {
+        return "Play the Game"
+    }
+
+}
 
 function playGame(){
         const canvas = this.document.getElementById('canvasDemo');
@@ -76,7 +123,7 @@ function playGame(){
                     const dx=obstacle.x - (this.x);
                     const dy=obstacle.y - (this.y);
                     const dis=Math.sqrt(dx*dx + dy*dy);
-                    if(dis< (obstacle.width/2.5 + this.width/2.5) && dis<(obstacle.height/2.5+this.height/2.5)){
+                    if(dis< (obstacle.width/2.3 + this.width/2.3) && dis<(obstacle.height/2.3+this.height/2.3)){
                         gameover=true;
                     }
                 });
@@ -160,7 +207,7 @@ function playGame(){
                 this.image =document.getElementById('rock');
                 this.x=this.gamewidth
                 this.y=this.gameheight-this.height;
-                this.speed=4;
+                this.speed=5;
                 let markedForDeletion=false;
             }
             draw(context){
@@ -277,4 +324,6 @@ function playGame(){
       
           return scores;
       }
+
+    
 

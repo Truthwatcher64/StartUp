@@ -68,6 +68,14 @@ I added style to the pages with CSS.
 - Used flex to make sure the page looks good on any screen. 
 
 ## JavaScript Deliverable
+I added all sorts of functionality to the website with javascript.
+
+- The game is made using javascript animations on a canvas
+- All buttons are linked to functions
+- Data is stored temporarily in the local storage and can be moved easily to a database in the future
+- A person can enter info to login, none is stored persistently
+- Functionality is present to implement websockets on the index page in the future
+- My idea of getting a big game has shrunk quite a bit, and it is a lot more basic now
 
 ## Service Deliverable
 
