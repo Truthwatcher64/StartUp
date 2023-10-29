@@ -25,7 +25,7 @@
             <input type="text" id="name"><br>
             <label for="password">Password</label>
             <input type="'text" id="password" name="password"></intput><br>
-            <button id="submitButton" class="custom-btn-scores-page" onclick="login()">Sign In</button>
+            <button id="submitButton" class="custom-btn-scores-page" onclick="loginScoresPage()">Sign In</button>
                 <br>
         </form>
     </nav>
@@ -35,50 +35,12 @@
     <div id='userScores-table' class="scores_header">Best Scores of All Time</div>
     <!--Personal Scores-->
     <table id='userScores-table-rows' class="fixed_headers">
-        <tr>
-            <th>1</th>
-            <td>360</td>
-        </tr>
-        <tr>
-            <th>2</th>
-            <td>310</td>
-        </tr>
-        <tr>
-            <th>3</th>
-            <td>220</td>
-        </tr>
-        <tr>
-            <th>4</th>
-            <td>170</td>
-        </tr>
-        <tr>
-            <th>5</th>
-            <td>130</td>
-        </tr>
+       
     </table>
     <div id="leaderScores-table" class="scores_header">Best Scores of All Time<div>
         <!--Best scores, pulled from server-->
         <table class="fixed_headers" id="leaderScores-table-rows">
-            <tr>
-                <th>1</th>
-                <td>550</td>
-            </tr>
-            <tr>
-                <th>2</th>
-                <td>500</td>
-            </tr>
-            <tr>
-                <th>3</th>
-                <td>480</td>
-            </tr>
-            <tr>
-                <th>4</th>
-                <td>480</td>
-            </tr>
-            <tr>
-                <th>5</th>
-                <td>430</td>
-            </tr>
+        
         </table>
     </div>
     <button id="submitButton" class="custom-btn-scores-page" onclick="logout()">Sign Out</button>

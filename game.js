@@ -233,8 +233,48 @@ function playGame(){
             if(!gameover){
             requestAnimationFrame(animate);
             }
+            if(gameover){
+                addFromGame(score.toFixed(0));
+            }
         }
         animate(0);
 
     }
+
+    function addFromGame(newScore){
+        console.log(newScore);
+        let scores = [];
+        const scoresText = localStorage.getItem('scores');
+        if (scoresText) {
+          scores = JSON.parse(scoresText);
+        }
+        scores = this.updateScores(newScore, scores);
+        console.log(scores)
+    
+        localStorage.setItem('scores', JSON.stringify(scores));
+    }
+    
+    function updateScores(score, scores) {
+        console.log(score)
+        const newScore = { score: score };
+    
+        let found = false;
+        for (const [i, prevScore] of scores.entries()) {
+          if (score > prevScore.score) {
+            scores.splice(i, 0, newScore);
+            found = true;
+            break;
+          }
+        }
+    
+        if (!found) {
+            scores.push(newScore);
+          }
+      
+          if (scores.length > 10) {
+            scores.length = 10;
+          }
+      
+          return scores;
+      }
 

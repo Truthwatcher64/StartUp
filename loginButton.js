@@ -12,7 +12,9 @@ function loginScoresPage() {
     const password=document.querySelector("#password");
     localStorage.setItem("userName", name.value);
     localStorage.setItem("password", password.value);
-    loadScores();
+    if(loadUsername()){
+        loadScores();
+    }
   }
 
 function logout(){
