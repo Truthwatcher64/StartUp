@@ -58,25 +58,25 @@ function playGame(){
                 else{
                     context.drawImage(this.image2, this.x-100, this.y, this.width+100, this.height);
                 }
-                context.strokeStyle='transparent';
+                // context.strokeStyle='transparent';
                 // context.beginPath();
                 // context.arc(this.x+this.width/2, this.y+this.height/2, this.width/2, 0, Math.PI*2);
                 // context.stroke();
                 // context.beginPath();
-                context.beginPath();
-                context.arc(this.x+this.width*.4, this.y+this.height*.7, this.width/3.5, 0, Math.PI*2);
-                context.stroke();
-                context.arc(this.x+this.width*.6, this.y+this.height*.25, this.width/3.5, 0, Math.PI*2);
-                context.stroke();
-                context.arc(this.x+this.width*.2, this.y+this.height*.35, this.width/5, 0, Math.PI*2);
-                context.stroke();
+                // context.beginPath();
+                // context.arc(this.x+this.width*.4, this.y+this.height*.7, this.width/3.5, 0, Math.PI*2);
+                // context.stroke();
+                // context.arc(this.x+this.width*.6, this.y+this.height*.25, this.width/3.5, 0, Math.PI*2);
+                // context.stroke();
+                // context.arc(this.x+this.width*.2, this.y+this.height*.35, this.width/5, 0, Math.PI*2);
+                // context.stroke();
             }
             update(input, deltaTime, allObstacles){
                 allObstacles.forEach(obstacle => {
-                    const dx=obstacle.x - this.x;
-                    const dy=obstacle.y - this.y;
+                    const dx=obstacle.x - (this.x);
+                    const dy=obstacle.y - (this.y);
                     const dis=Math.sqrt(dx*dx + dy*dy);
-                    if(dis< (obstacle.width/2 + this.width/2)){
+                    if(dis< (obstacle.width/2.5 + this.width/2.5) && dis<(obstacle.height/2.5+this.height/2.5)){
                         gameover=true;
                     }
                 });
@@ -160,7 +160,7 @@ function playGame(){
                 this.image =document.getElementById('rock');
                 this.x=this.gamewidth
                 this.y=this.gameheight-this.height;
-                this.speed=2;
+                this.speed=4;
                 let markedForDeletion=false;
             }
             draw(context){
