@@ -28,20 +28,34 @@ Links
 - <a href="imagePage.html"> <img src="smiley.jpg"> </a> 
 
 Loops
+
 let x;
+
 for(x=0; x<5; x++){
+
 //body
+
 }
+
 Can initiallize x in header and can increment in body as well, break will end loop
 
+
 //for each
+
 for(let thing in leaderList){
+
 //body
+
 }
+
 //thing is a variable inside of the object/list/array leaderList
 
 
 flex column - vertical top to bottom
+
 flex row - left to right
+
 justify: center, flex-start, flex-end, space around, space between
+
 align-items: center, flex-start, flex-end, stretch*, baseline 
+
