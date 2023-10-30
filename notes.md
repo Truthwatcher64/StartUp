@@ -22,9 +22,10 @@ From Inside to Outside
 - parent
 
 Links
-<link href="main.css" rel="stylesheet">
-<script src="game.js"></script>
-<a href="index.html">click me</a>
+- <link href="main.css" rel="stylesheet">
+- <script src="game.js"></script>
+- <a href="index.html">click me</a>
+- <a href="imagePage.html"> <img src="smiley.jpg"> </a> 
 
 Loops
 let x;
@@ -42,4 +43,5 @@ for(let thing in leaderList){
 
 flex column - vertical top to bottom
 flex row - left to right
-justify, start, end, space around, space between
+justify: center, flex-start, flex-end, space around, space between
+align-items: center, flex-start, flex-end, stretch*, baseline 
