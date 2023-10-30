@@ -38,6 +38,7 @@ for(x=0; x<5; x++){
 }
 
 Can initiallize x in header and can increment in body as well, break will end loop
+
 ---
 
 //for each
@@ -49,6 +50,7 @@ for(let thing in leaderList){
 }
 
 //thing is a variable inside of the object/list/array leaderList
+
 ---
 
 flex column - vertical top to bottom
