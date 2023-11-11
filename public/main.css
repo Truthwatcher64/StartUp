@@ -24,7 +24,6 @@ html {
   line-height: 1.4;
   height: 100%;
 
-  /*background-color: black;*/
 }
 body{
   font-family: 'Roboto', sans-serif;
@@ -130,6 +129,8 @@ form{
     color: #fff;
     font-family: 'Lato', sans-serif;
     font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 20px;
     
   }
 
@@ -152,6 +153,10 @@ form{
   font-weight: 700;
   padding: 0 25px;
   float: left;
+}
+
+#name{
+  margin-bottom: 5px;
 }
 
 /* MENU */

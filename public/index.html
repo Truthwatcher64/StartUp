@@ -5,6 +5,7 @@
 <head>
     <link href="main.css" rel="stylesheet">
     <script src="loginButton.js"></script>
+    <script src="indexImage.js"></script>
 </head>
 
         
@@ -29,10 +30,10 @@
         <br>
         
         </hr>
-        <!--This image in the real project will call for a new random one each time the page loads-->
-        <img alt="mountain landscape" src="https://images.pexels.com/photos/164170/pexels-photo-164170.jpeg" width="900" height="400" class="png"/>
+        <!--This image will call for a new random one each time the page loads-->
+        <div id=holder onload="loadImageFile()"></div>
         <br>
-        <script src="loadImage.js"></script>
+        
     </body>
 </main>
 <footer>
