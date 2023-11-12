@@ -78,6 +78,10 @@ I added all sorts of functionality to the website with javascript.
 - My idea of getting a big game has shrunk quite a bit, and it is a lot more basic now
 
 ## Service Deliverable
+I added service calls through Javascript
+
+- The homepage loads a random image each time it is loaded
+- Top scores are stored in the servers memory instead of local storage
 
 ## DB Deliverable
 
