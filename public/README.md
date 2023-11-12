@@ -80,6 +80,7 @@ I added all sorts of functionality to the website with javascript.
 ## Service Deliverable
 I added service calls through Javascript
 
+- The project uses Node.js and Express
 - The homepage loads a random image each time it is loaded
 - Top scores are stored in the servers memory instead of local storage
 
