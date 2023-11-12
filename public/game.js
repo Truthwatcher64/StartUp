@@ -53,8 +53,15 @@ function getHighestScore(){
 }
 
 }
-
+let currently_running=false;
 function playGame(){
+        if(currently_running){
+            /*
+            Don't start a new game until previous game is over
+            */
+        }
+        else{
+            currently_running=true;
         const canvas = this.document.getElementById('canvasDemo');
         const ctx = canvas.getContext('2d');
         canvas.width=1000;
@@ -289,10 +296,11 @@ function playGame(){
             }
             if(gameover){
                 addFromGame(score.toFixed(0));
+                currently_running=false;
             }
         }
         animate(0);
-
+    }
 }
 
 function addFromGame(newScore){
