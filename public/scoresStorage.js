@@ -13,8 +13,8 @@ function loadScores() {
     if (scoresText) {
       scores = JSON.parse(scoresText);
     }
-    console.log(scores);
-    console.log(scores.length);
+    //console.log(scores);
+    //console.log(scores.length);
     const tableBodyEl=document.getElementById('userScores-table-rows');
 
     if (scores.length) {
@@ -39,7 +39,7 @@ function loadScores() {
 
 function loadUsername(){
     let name=localStorage.getItem('userName');
-    console.log(name);
+    //console.log(name);
     if(name){
         document.getElementById("userScores-table").innerHTML=name;
         return true;
@@ -70,31 +70,47 @@ function add(){
 
 
 }
-function loadLeaderScores(){
-    const scoresText = localStorage.getItem('leaderScores');
-    if (scoresText) {
-      scores = JSON.parse(scoresText);
-    }
+async function loadLeaderScores(){
 
-    const tableBodyEl=document.getElementById('leaderScores-table-rows');
+  let scores=[];
+  try{
+    console.log('Bye')
+      const response = await fetch('/api/leaderScores');
+      scores = await response.json();
 
-    if (scores.length) {
-        for (const [i, score] of scores.entries()) {
-          const positionTdEl = document.createElement('td');
-          const scoreTdEl = document.createElement('td');
-    
-          positionTdEl.textContent = i + 1;
-          scoreTdEl.textContent = score.score;
-    
-          const rowEl = document.createElement('tr');
-          rowEl.appendChild(positionTdEl);
-          rowEl.appendChild(scoreTdEl);
-    
-          tableBodyEl.appendChild(rowEl);
-        }
-      } else {
-        tableBodyEl.innerHTML = '<tr><td colSpan=4>No One Has Played Yet</td></tr><tr><td colSpan=4>Be The First To Get A HighScore</td></tr>';
+      localStorage.setItem('leaderScores', JSON.stringify(scores));
+  }
+  catch{
+      //fallback
+      const scoresText = localStorage.getItem('leaderScores');
+      if (scoresText) {
+          scores = JSON.parse(scoresText);
       }
+  }
+  
+
+  //Make the table
+
+  const tableBodyEl=document.getElementById('leaderScores-table-rows');
+
+  if (scores.length) {
+    for (const [i, score] of scores.entries()) {
+      const positionTdEl = document.createElement('td');
+      const scoreTdEl = document.createElement('td');
+
+      positionTdEl.textContent = i + 1;
+      scoreTdEl.textContent = score.score;
+
+      const rowEl = document.createElement('tr');
+      rowEl.appendChild(positionTdEl);
+      rowEl.appendChild(scoreTdEl);
+
+      tableBodyEl.appendChild(rowEl);
+    }
+  } else {
+    tableBodyEl.innerHTML = '<tr><td colSpan=4>No One Has Played Yet</td></tr><tr><td colSpan=4>Be The First To Get A HighScore</td></tr>';
+  }
 
 }
+
 

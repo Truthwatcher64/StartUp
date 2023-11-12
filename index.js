@@ -16,14 +16,14 @@ const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // GetScores
-apiRouter.get('/scores', (_req, res) => {
-res.send(scores);
+apiRouter.get('/leaderScores', (_req, res) => {
+  res.send(allScores);
 });
 
 // SubmitScore
-apiRouter.post('/score', (req, res) => {
-scores = updateScores(req.body, scores);
-res.send(scores);
+apiRouter.post('/leaderScore', (req, res) => {
+  scores = updateLeaderScores(req.body, allScores);
+  res.send(allScorescores);
 });
 
 // Return the application's default page if the path is unknown
@@ -34,3 +34,26 @@ app.use((_req, res) => {
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
+
+let allScores=[];
+
+function updateLeaderScores(newScore, allScores){
+  let greater=false;
+  //search and see if score is in current list
+  for(const [i, oldScore] of allScores.entries()){
+    if(newScore.score > oldScore.score){
+      allScores.splice(i, 0, newScore);
+      greater=true;
+      break;
+    }
+  }
+  //add new score to end of list
+  if(!greater){
+      allScores.push(newScore);
+   
+  }
+  if(allScores.length>10){
+    allScores.length=10;
+  }
+  return allScores;
+}
