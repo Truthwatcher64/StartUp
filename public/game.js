@@ -3,17 +3,21 @@ window.addEventListener('load', loadNotification());
 function loadNotification(){
     let holder = document.getElementById('notification-high-score');
     let temp = getHighestScore();
-    if(temp === 'Play the Game'){
-        holder.innerHTML = '<h4>Play The Game</h4>'
+    if(temp){
+        if(temp === 'Play the Game'){
+            holder.innerHTML = '<h4>Play The Game</h4>'
+        }
+        else{
+            holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>'
+        }
     }
     else{
-        holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>'
+        holder.innerHTML = '<h4>Play The Game</h4>'
     }
 }
 
-async function getHighestScore(){
-    
-
+function getHighestScore(){
+    if(localStorage.getItem('leaderScores')){
     if(localStorage.getItem('userName')){
         let scoresText = localStorage.getItem('leaderScores');
         if (scoresText) {
@@ -46,6 +50,7 @@ async function getHighestScore(){
     else {
         return "Play the Game"
     }
+}
 
 }
 
@@ -311,47 +316,58 @@ function addFromGame(newScore){
 }
 
 async function sendNewScore(score) {
-const userName = this.getPlayerName();
-const date = new Date().toLocaleDateString();
-const newScore = {name: userName, score: score, date: date};
+    if(loadUsername){}
+    const userName = localStorage.getItem('username');
+    const newScore = {score: score};
 
-try {
-    const response = await fetch('/api/leaderScore', {
-    method: 'POST',
-    headers: {'content-type': 'application/json'},
-    body: JSON.stringify(newScore),
-    });
+    try {
+        const response = await fetch('/api/leaderScore', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(newScore),
+        });
 
-    loadLeaderScores();
-    getHighestScore();
-} catch {
-    //don't update
-    //this.updateScoresLocal(newScore);
+        loadLeaderScores();
+        getHighestScore();
+    } catch {
+        //don't update
+        //this.updateScoresLocal(newScore);
+    }
 }
-}
 
-function updateScores(score, scores) {
-console.log(score)
-const newScore = { score: score };
+
+function updateScores(score) {
+"use strict";
+console.log(score);
+let scores = [];
+const scoresText = localStorage.getItem('scores');
+if (scoresText) {
+  scores = JSON.parse(scoresText);
+}
+const newScore={score : score}
 
 let found = false;
+
 for (const [i, prevScore] of scores.entries()) {
-    if (score > prevScore.score) {
-    scores.splice(i, 0, newScore);
-    found = true;
-    break;
+    console.log("Times "+i)
+    console.log(newScore.score+" "+prevScore.score);
+    if (parseInt(newScore.score, 10) > parseInt(prevScore.score, 10)) {
+        console.log(newScore.score+" "+prevScore.score);
+        scores.splice(i, 0, newScore);
+        found = true;
+        break;
     }
 }
-
+console.log(scores);
 if (!found) {
     scores.push(newScore);
-    }
+}
 
-    if (scores.length > 10) {
-    scores.length = 10;
-    }
+if (scores.length > 5) {
+scores.pop();
+}
 
-    return scores;
+return scores;
 }
 
     

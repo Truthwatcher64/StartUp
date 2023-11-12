@@ -3,7 +3,7 @@ window.addEventListener('load', () => {
         window.addEventListener('load', loadScores());
     }
 });
-window.addEventListener('load', add());
+//window.addEventListener('load', add());
 window.addEventListener('load', loadLeaderScores());
 
 function loadScores() {
@@ -87,6 +87,7 @@ async function loadLeaderScores(){
           scores = JSON.parse(scoresText);
       }
   }
+
   
 
   //Make the table
@@ -95,7 +96,7 @@ async function loadLeaderScores(){
 
   if (scores.length) {
     for (const [i, score] of scores.entries()) {
-      const positionTdEl = document.createElement('td');
+      const positionTdEl = document.createElement('th');
       const scoreTdEl = document.createElement('td');
 
       positionTdEl.textContent = i + 1;
@@ -108,7 +109,7 @@ async function loadLeaderScores(){
       tableBodyEl.appendChild(rowEl);
     }
   } else {
-    tableBodyEl.innerHTML = '<tr><td colSpan=4>No One Has Played Yet</td></tr><tr><td colSpan=4>Be The First To Get A HighScore</td></tr>';
+    tableBodyEl.innerHTML = '<tr><td colSpan=28>No One Has Played Yet.</td></tr><tr><td colSpan=20>Be The First To Get A HighScore.</td></tr>';
   }
 
 }

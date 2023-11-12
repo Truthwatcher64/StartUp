@@ -41,7 +41,7 @@ function updateLeaderScores(newScore, allScores){
   let greater=false;
   //search and see if score is in current list
   for(const [i, oldScore] of allScores.entries()){
-    if(newScore.score > oldScore.score){
+    if(parseInt(newScore.score, 10) > parseInt(oldScore.score, 10)){
       allScores.splice(i, 0, newScore);
       greater=true;
       break;
@@ -52,8 +52,8 @@ function updateLeaderScores(newScore, allScores){
       allScores.push(newScore);
    
   }
-  if(allScores.length>10){
-    allScores.length=10;
+  if(allScores.length>5){
+    allScores.length=5;
   }
   return allScores;
 }
