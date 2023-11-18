@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const DB = require('./database.js');
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -15,17 +16,6 @@ app.use(express.static('public'));
 const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// GetScores
-apiRouter.get('/leaderScores', (_req, res) => {
-  res.send(allScores);
-});
-
-// SubmitScore
-apiRouter.post('/leaderScore', (req, res) => {
-  scores = updateLeaderScores(req.body, allScores);
-  res.send(allScorescores);
-});
-
 // Return the application's default page if the path is unknown
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
@@ -35,8 +25,25 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-let allScores=[];
+let allScores= [];
 
+// GetScores
+apiRouter.get('/leaderScores', async (req, res)=>{
+  allScores= await DB.findScores();
+  res.send(allScores);
+})
+
+// SubmitScore
+apiRouter.post('/leaderScore', async (req, res) => {
+  allScores= await DB.findScores();
+  console.log(allScores);
+  scores = updateLeaderScores(req.body, allScores);
+  await DB.saveScores(scores);
+  allScores= await DB.findScores();
+  res.send(allScores);
+});
+
+//updates the scores list locally
 function updateLeaderScores(newScore, allScores){
   let greater=false;
   //search and see if score is in current list

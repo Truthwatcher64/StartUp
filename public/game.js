@@ -3,36 +3,56 @@ window.addEventListener('load', loadNotification());
 function loadNotification(){
     let holder = document.getElementById('notification-high-score');
     let temp = getHighestScore();
-    if(temp){
+    console.log("To output: "+temp);
+    if(temp!=null){
         if(temp === 'Play the Game'){
-            holder.innerHTML = '<h4>Play The Game</h4>'
+            holder.innerHTML = '<h4>Play The Game</h4>';
+        }
+        if(temp===-2){
+            holder.innerHTML ='<h4>You have the high score! Good Job.</h4>';
         }
         else{
-            holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>'
+            holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>';
         }
     }
     else{
-        holder.innerHTML = '<h4>Play The Game</h4>'
+        holder.innerHTML = '<h4>Play The Game</h4>';
     }
 }
 
 function getHighestScore(){
+    let scoresText = localStorage.getItem('leaderScores');
+    if (scoresText) {
+        leaderScores = JSON.parse(scoresText);
+        console.log(leaderScores)
+    }
+    tempScore=leaderScores[4].score;
     if(localStorage.getItem('leaderScores')){
     if(localStorage.getItem('userName')){
-        let scoresText = localStorage.getItem('leaderScores');
-        if (scoresText) {
-            leaderScores = JSON.parse(scoresText);
-        }
+        
         scoresText = localStorage.getItem('scores')
+        scores = JSON.parse(scoresText);
+        topUserScore=scores[0].score;
+        if(topUserScore>leaderScores[0].score){
+            return -2;
+        }
         if (scoresText) {
-            scores = JSON.parse(scoresText);
-            let tempScore = leaderScores[0];
+            console.log('temp');
+            let tempScore = leaderScores[0].score;
+            breakvar=true;
+            console.log(tempScore);
             for(let score in leaderScores){
-                if(score[0]<score){
-                    tempScore=score;
+                if(topUserScore<leaderScores[score].score && breakvar===true){
+                    //console.log(leaderScores[score].score);
+                    tempScore=leaderScores[score].score;
+                    
                 }
-                else{
-                    break;
+                else if(breakvar===true){
+                    tempScore=leaderScores[score-1].score;
+                    console.log("High: "+tempScore);
+                    breakvar=false;
+                    return tempScore;
+                    
                 }
             }
         }
@@ -40,12 +60,6 @@ function getHighestScore(){
             console.log(leaderScores[4].scores)
             return leaderScores[4].score;
         }
-        if(tempScore == leaderScores[0]){
-            console.log("You have the Highest Score")
-            return "You have the Highest Score";
-        }
-        console.log(tempScore.score);
-        return tempScore.score;
     }
     else {
         return "Play the Game"
