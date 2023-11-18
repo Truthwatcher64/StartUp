@@ -1,5 +1,8 @@
 const { MongoClient } = require('mongodb');
 const config = require('./dbConfig.json');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid');
+const config = require('./dbConfig.json');
 
 
 // Connect to the database cluster
@@ -7,7 +10,8 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 
 const db = client.db('RaptorScores');
-const collection = db.collection('Scores')
+const scoreCollection = db.collection('Scores');
+const userCollection = db.collection('Users');
 
 
 async function load(){
@@ -22,14 +26,36 @@ async function load(){
   });
 }
 
+function getUser(username) {
+  return userCollection.findOne({ username: username });
+}
+
+function getUserByToken(token) {
+  return userCollection.findOne({ token: token });
+}
+
+async function createUser(username, password) {
+  //Hash
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  const user = {
+    username: username,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await userCollection.insertOne(user);
+
+  return user;
+}
+
 async function saveScores(scores){
   console.log("Save\n"+scores);
   //clear the old data
-  console.log(await collection.deleteMany());
+  console.log(await scoreCollection.deleteMany());
   //await collection.delete_many({});
   //insert the new list
   console.log(scores);
-  await collection.insertMany(scores);
+  await scoreCollection.insertMany(scores);
 }
 
 async function findScores(){
@@ -44,7 +70,7 @@ async function findScores(){
   // //console.log(scoresList);
   // return scoresList.toArray();
 
-  scoresList=collection.find({}).toArray(function(err, documents) {
+  scoresList=scoreCollection.find({}).toArray(function(err, documents) {
     if (err) {
       console.error('Error:', err);
       return;
@@ -60,4 +86,4 @@ async function findScores(){
   // return cursor.toArray();
 }
 
-module.exports = { saveScores, findScores };
+module.exports = { saveScores, findScores, getUser, getUserByToken, createUser };
