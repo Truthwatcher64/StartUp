@@ -4,16 +4,18 @@ function loadNotification(){
     let holder = document.getElementById('notification-high-score');
     let temp = getHighestScore();
     console.log("To output: "+temp);
-    if(temp!=null){
-        if(temp === 'Play the Game'){
+    temp=parseInt(temp, 10);
+    if(temp>0){
+        if(temp == -1){
             holder.innerHTML = '<h4>Play The Game</h4>';
         }
-        if(temp===-2){
-            holder.innerHTML ='<h4>You have the high score! Good Job.</h4>';
-        }
+        
         else{
             holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>';
         }
+    }
+    else if(temp === -2){
+        holder.innerHTML ='<h4>You have the high score! Good Job.</h4>';
     }
     else{
         holder.innerHTML = '<h4>Play The Game</h4>';
@@ -24,30 +26,34 @@ function getHighestScore(){
     let scoresText = localStorage.getItem('leaderScores');
     if (scoresText) {
         leaderScores = JSON.parse(scoresText);
-        console.log(leaderScores)
+        tempScore=leaderScores[4].score;
     }
-    tempScore=leaderScores[4].score;
+    else{
+        return -1;
+    }
+    
     if(localStorage.getItem('leaderScores')){
     if(localStorage.getItem('userName')){
         
         scoresText = localStorage.getItem('scores')
         scores = JSON.parse(scoresText);
-        topUserScore=scores[0].score;
+        topUserScore=parseInt(scores[0].score, 10);
+        console.log("Best User: "+topUserScore)
         if(topUserScore>leaderScores[0].score){
             return -2;
         }
         if (scoresText) {
             console.log('temp');
-            let tempScore = leaderScores[0].score;
+            let tempScore = parseInt(leaderScores[0].score);
             breakvar=true;
             console.log(tempScore);
             for(let score in leaderScores){
                 if(topUserScore<leaderScores[score].score && breakvar===true){
-                    //console.log(leaderScores[score].score);
+                    console.log("Here");
                     tempScore=leaderScores[score].score;
-                    
                 }
                 else if(breakvar===true){
+                    console.log(leaderScores[score-1].score);
                     tempScore=leaderScores[score-1].score;
                     console.log("High: "+tempScore);
                     breakvar=false;
@@ -57,12 +63,13 @@ function getHighestScore(){
             }
         }
         else{
-            console.log(leaderScores[4].scores)
+            console.log('High: '+leaderScores[4].scores)
             return leaderScores[4].score;
         }
+        return tempScore;
     }
     else {
-        return "Play the Game"
+        return -1;
     }
 }
 
