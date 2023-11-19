@@ -33,10 +33,12 @@ function getHighestScore(){
     }
     
     if(localStorage.getItem('leaderScores')){
-    if(localStorage.getItem('userName')){
-        
-        scoresText = localStorage.getItem('scores')
+    if(localStorage.getItem('userName') != null){
+        if(localStorage.getItem('scores')){
+        scoresText = localStorage.getItem('scores');
+        console.log("scorestext: "+scoresText);
         scores = JSON.parse(scoresText);
+        console.log(scores);
         topUserScore=parseInt(scores[0].score, 10);
         console.log("Best User: "+topUserScore)
         if(topUserScore>leaderScores[0].score){
@@ -64,18 +66,20 @@ function getHighestScore(){
         }
         else{
             console.log('High: '+leaderScores[4].scores)
-            return leaderScores[4].score;
+            return leaderScores[4];
         }
         return tempScore;
     }
+}
     else {
         return -1;
     }
 }
 
 }
-let currently_running=false;
+
 function playGame(){
+    let currently_running=false;
         if(currently_running){
             /*
             Don't start a new game until previous game is over

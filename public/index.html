@@ -4,8 +4,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <head>
     <link href="main.css" rel="stylesheet">
-    <script src="loginButton.js"></script>
+    <!--<script src="loginButton.js"></script>-->
     <script src="indexImage.js"></script>
+    <script src="login.js"></script>
 </head>
 
         
@@ -23,11 +24,24 @@
         <p><h2>Login to play</h2></p>
         
         <label for="login">Username</label>
-        <input type="text" id="name" name="login"><br>
+        <input type="text" id="name" name="name"><br>
         <label for="password">Password</label>
         <input type="'text" id="password" name="password"></intput><br>
-        <input type="submit" id="submitButton" class="custom-btn-index-page" onclick="loginHomePage()">
+        <button type="button" id="submitButton" class="custom-btn-index-page" onclick="loginUser()">Sign In</button>
+        <button type="button" id="submitButton" class="custom-btn-index-page" onclick="createUser()">Create</button>
         <br>
+
+         <!-- Error dialog -->
+        <div class="modal fade" id="msgModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-dark">
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
         
         </hr>
         <!--This image will call for a new random one each time the page loads-->

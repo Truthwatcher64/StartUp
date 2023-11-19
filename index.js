@@ -28,19 +28,11 @@ app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
 
-// secureApiRouter verifies credentials for endpoints
-var secureApiRouter = express.Router();
-apiRouter.use(secureApiRouter);
-
-secureApiRouter.use(async (req, res, next) => {
-  authToken = req.cookies[authCookieName];
-  const user = await DB.getUserByToken(authToken);
-  if (user) {
-    next();
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
-  }
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
 });
+
+
 
 let allScores= [];
 const authCookieName = 'token';
@@ -48,11 +40,15 @@ const authCookieName = 'token';
 /* Storing users*/
 // CreateAuth token for a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  if (await DB.getUser(req.body.username)) {
+  console.log("Input: "+req.body.userName);
+  console.log("Input: "+req.body.password);
+  if (await DB.getUser(req.body.userName)) {
     res.status(409).send({ msg: 'Existing user' });
     console.log("User already exists");
   } else {
-    const user = await DB.createUser(req.body.username, req.body.password);
+  console.log("Input: "+req.body.userName);
+  console.log("Input: "+req.body.password);
+    const user = await DB.createUser(req.body.userName, req.body.password);
 
     // Set the cookie
     setAuthCookie(res, user.token);
@@ -143,3 +139,17 @@ function updateLeaderScores(newScore, allScores){
   }
   return allScores;
 }
+
+// // secureApiRouter verifies credentials for endpoints
+// var secureApiRouter = express.Router();
+// apiRouter.use(secureApiRouter);
+
+// secureApiRouter.use(async (req, res, next) => {
+//   authToken = req.cookies[authCookieName];
+//   const user = await DB.getUserByToken(authToken);
+//   if (user) {
+//     next();
+//   } else {
+//     res.status(401).send({ msg: 'Unauthorized' });
+//   }
+// });

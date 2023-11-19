@@ -2,7 +2,6 @@ const { MongoClient } = require('mongodb');
 const config = require('./dbConfig.json');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
-const config = require('./dbConfig.json');
 
 
 // Connect to the database cluster
