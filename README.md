@@ -85,8 +85,16 @@ I added service calls through Javascript
 - Top scores are stored in the servers memory instead of local storage
 
 ## DB Deliverable
+I added backend connections that saves the highscores to a mongo database.
+
+- Top scores are saved in database and are consistently updated
 
 ## Login Deliverable
+I added login functionality that stores usernames in a mongo database.
+
+- Users can sign in with a unique username and password
+- Passwords are stored in a hashed format
+- Each user gets a authToken cookie when they are signed in
 
 ## WebSocket Deliverable
 

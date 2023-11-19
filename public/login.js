@@ -21,12 +21,13 @@ async function loginUser() {
         localStorage.setItem('userName', userName);
         window.location.href = 'game.html';
     } else {
-    console.log(body.msg);
+    
     const body = await response.json();
+    await console.log(body.msg);
     const modalEl = document.querySelector('#msgModal');
-    modalEl.querySelector('.modal-body').textContent = `⚠ Error: ${body.msg}`;
-    // const msgModal = new bootstrap.Modal(modalEl, {});
-    // msgModal.show();
+    modalEl.querySelector('.modal-body').textContent = `Error: ${body.msg}`;
+    const msgModal = new bootstrap.Modal(modalEl, {});
+    msgModal.show();
     modalEl.innerHTML=body.msg;
     }
 }
