@@ -19,7 +19,7 @@ async function loginUser() {
 
     if (response.ok) {
         localStorage.setItem('userName', userName);
-        window.location.href = 'play.html';
+        window.location.href = 'game.html';
     } else {
     console.log(body.msg);
     const body = await response.json();
@@ -33,6 +33,7 @@ async function loginUser() {
 
     function logout() {
         localStorage.removeItem('userName');
+        localStorage.removeItem('scores');
         fetch(`/api/auth/logout`, {
           method: 'delete',
         }).then(() => (window.location.href = '/'));

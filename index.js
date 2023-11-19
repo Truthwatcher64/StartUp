@@ -62,7 +62,8 @@ apiRouter.post('/auth/create', async (req, res) => {
 
 // GetAuth token for the provided credentials
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = await DB.getUser(req.body.username);
+  console.log("Search: "+req.body.userName);
+  const user = await DB.getUser(req.body.userName);
   if (user) {
     if (await bcrypt.compare(req.body.password, user.password)) {
       setAuthCookie(res, user.token);
@@ -74,8 +75,8 @@ apiRouter.post('/auth/login', async (req, res) => {
 });
 
 // GetUser returns information about a user
-apiRouter.get('/user/:email', async (req, res) => {
-  const user = await DB.getUser(req.params.username);
+apiRouter.get('/user/:userName', async (req, res) => {
+  const user = await DB.getUser(req.params.userName);
   if (user) {
     const token = req?.cookies.token;
     res.send({ username: user.username, authenticated: token === user.token });
@@ -140,16 +141,16 @@ function updateLeaderScores(newScore, allScores){
   return allScores;
 }
 
-// // secureApiRouter verifies credentials for endpoints
-// var secureApiRouter = express.Router();
-// apiRouter.use(secureApiRouter);
+// secureApiRouter verifies credentials for endpoints
+var secureApiRouter = express.Router();
+apiRouter.use(secureApiRouter);
 
-// secureApiRouter.use(async (req, res, next) => {
-//   authToken = req.cookies[authCookieName];
-//   const user = await DB.getUserByToken(authToken);
-//   if (user) {
-//     next();
-//   } else {
-//     res.status(401).send({ msg: 'Unauthorized' });
-//   }
-// });
+secureApiRouter.use(async (req, res, next) => {
+  authToken = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(authToken);
+  if (user) {
+    next();
+  } else {
+    res.status(401).send({ msg: 'Unauthorized' });
+  }
+});

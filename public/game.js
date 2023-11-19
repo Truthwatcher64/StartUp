@@ -1,3 +1,5 @@
+
+
 window.addEventListener('load', loadNotification());
 
 function loadNotification(){
@@ -5,7 +7,7 @@ function loadNotification(){
     let temp = getHighestScore();
     console.log("To output: "+temp);
     temp=parseInt(temp, 10);
-    if(temp>0){
+    if(temp>0 && temp!=null){
         if(temp == -1){
             holder.innerHTML = '<h4>Play The Game</h4>';
         }
@@ -14,12 +16,26 @@ function loadNotification(){
             holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>';
         }
     }
-    else if(temp === -2){
+    else if(temp === -2 && temp != null){
         holder.innerHTML ='<h4>You have the high score! Good Job.</h4>';
     }
     else{
         holder.innerHTML = '<h4>Play The Game</h4>';
     }
+}
+
+function loadUsername(){
+    let name=localStorage.getItem('userName');
+    //console.log(name);
+    if(name){
+        document.getElementById("userScores-table").innerHTML=name;
+        return true;
+    }
+    else{
+        document.getElementById('userScores-table').innerText="Not signed in";
+        return false;
+    }
+
 }
 
 function getHighestScore(){
@@ -54,7 +70,7 @@ function getHighestScore(){
                     console.log("Here");
                     tempScore=leaderScores[score].score;
                 }
-                else if(breakvar===true){
+                else if(breakvar===true && score>0){
                     console.log(leaderScores[score-1].score);
                     tempScore=leaderScores[score-1].score;
                     console.log("High: "+tempScore);
@@ -349,9 +365,10 @@ function addFromGame(newScore){
 }
 
 async function sendNewScore(score) {
-    if(loadUsername){}
-    const userName = localStorage.getItem('username');
-    const newScore = {score: score};
+    if(loadUsername){
+        const userName = localStorage.getItem('username');
+        const newScore = {score: score};
+    }
 
     try {
         const response = await fetch('/api/leaderScore', {
