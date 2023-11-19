@@ -28,7 +28,7 @@ async function loginUser() {
     modalEl.querySelector('.modal-body').textContent = `Error: ${body.msg}`;
     const msgModal = new bootstrap.Modal(modalEl, {});
     msgModal.show();
-    modalEl.innerHTML=body.msg;
+    //modalEl.innerHTML=body.msg;
     }
 }
 
