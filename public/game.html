@@ -26,18 +26,25 @@
     <div class="bodyTemp"></div>
     <!--This represents the notification about what score the person should beat next-->
     <p id="notification-high-score" class="lead" style="text-align: left; margin: 5px;"></p>
+    
         
     </p>
     <button class="custom-btn-game-page" onclick="playGame()">Start Game</button>
     <hr>
+    <div id="center-flex">
+        <div class="flex-item">
+            <!--This canvas will be use to show the game. It cannot do anything right now because it requires JavaScript-->
+            <canvas id="canvasDemo" width="1000" height="500" style="border: 3px solid #000000"></canvas>
+            <!--<img alt="mariachi figure" src="mariachi_base.jpg" width="100" height="250"/>-->
+            <canvas id="background" width="1000" height="500" style="border: 3px solid #000000"></canvas>
+            <img id="raptorImage" src="/Assets/raptor_1.png">
+            <img id="raptorImage2" src="/Assets/raptor_2.png">
+            <img id="rock" src="/Assets/rock.png">
+        </div>
+        <!--Websocket that tells the user if another person is playing-->
+        <p id="other-users" class="flex-item" style="text-align: left; margin: 5px;"></p>
+    </div>
 
-    <!--This canvas will be use to show the game. It cannot do anything right now because it requires JavaScript-->
-    <canvas id="canvasDemo" width="1000" height="500" style="border: 3px solid #000000"></canvas>
-    <!--<img alt="mariachi figure" src="mariachi_base.jpg" width="100" height="250"/>-->
-    <canvas id="background" width="1000" height="500" style="border: 3px solid #000000"></canvas>
-    <img id="raptorImage" src="/Assets/raptor_1.png">
-    <img id="raptorImage2" src="/Assets/raptor_2.png">
-    <img id="rock" src="/Assets/rock.png">
 
     <!--<script src="scoresStorage.js"></script>-->
     <script src="game.js"></script>

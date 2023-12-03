@@ -1,4 +1,14 @@
 
+#center-flex {
+  display: flex;
+  flex-direction: row;
+}
+.flex-item {
+  /*margin: 10px;*/
+  padding: 10px;
+  /*border: 1px solid #0b0a0a;*/
+}
+
 #canvasDemo {
   background: transparent;
 

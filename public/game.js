@@ -4,25 +4,25 @@ const GameStartEvent = 'gameStart';
 window.addEventListener('load', loadNotification());
 
 function loadNotification(){
-    // let holder = document.getElementById('notification-high-score');
-    // let temp = getHighestScore();
-    // console.log("To output: "+temp);
-    // temp=parseInt(temp, 10);
-    // if(temp>0 && temp!=null){
-    //     if(temp == -1){
-    //         holder.innerHTML = '<h4>Play The Game</h4>';
-    //     }
+    let holder = document.getElementById('notification-high-score');
+    let temp = getHighestScore();
+    console.log("To output: "+temp);
+    temp=parseInt(temp, 10);
+    if(temp>0 && temp!=null){
+        if(temp == -1){
+            holder.innerHTML = '<h4>Play The Game</h4>';
+        }
         
-    //     else{
-    //         holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>';
-    //     }
-    // }
-    // else if(temp === -2 && temp != null){
-    //     holder.innerHTML ='<h4>You have the high score! Good Job.</h4>';
-    // }
-    // else{
-    //     holder.innerHTML = '<h4>Play The Game</h4>';
-    // }
+        else{
+            holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>';
+        }
+    }
+    else if(temp === -2 && temp != null){
+        holder.innerHTML ='<h4>You have the high score! Good Job.</h4>';
+    }
+    else{
+        holder.innerHTML = '<h4>Play The Game</h4>';
+    }
 
     configureWebSocket();
 }
@@ -348,6 +348,9 @@ function playGame(){
             if(gameover){
                 addFromGame(score.toFixed(0));
                 currently_running=false;
+                // Let other players know the game has concluded
+                console.log(score.toFixed(0))
+                this.broadcastEvent(getPlayerName(), GameEndEvent, parseInt(score.toFixed(0)));
             }
         }
         animate(0);
@@ -356,7 +359,7 @@ function playGame(){
 }
 
 function configureWebSocket() {
-    console.log("Setup");
+    //console.log("Setup");
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
     this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
     this.socket.onopen = (event) => {
@@ -368,7 +371,8 @@ function configureWebSocket() {
     this.socket.onmessage = async (event) => {
       const msg = JSON.parse(await event.data.text());
       if (msg.type === GameEndEvent) {
-        this.displayMsg('player', msg.from, `scored ${msg.value.score}`);
+        console.log(msg.value)
+        this.displayMsg('player', msg.from, `scored ${parseInt(msg.value)}`);
       } else if (msg.type === GameStartEvent) {
         this.displayMsg('player', msg.from, `started a new game`);
       }
@@ -376,7 +380,11 @@ function configureWebSocket() {
   }
 
   function displayMsg(cls, from, msg) {
-    const chatText = document.querySelector('#notification-high-score');
+    const chatText = document.querySelector('#other-users');
+    //cap the max size of the text
+    if(chatText.length>300){
+        chatText="";
+    }
     chatText.innerHTML =
       `<div class="event"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
   }
