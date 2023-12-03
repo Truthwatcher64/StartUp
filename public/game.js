@@ -4,6 +4,7 @@ const GameStartEvent = 'gameStart';
 window.addEventListener('load', loadNotification());
 
 function loadNotification(){
+    //addFromGame(50);    
     let holder = document.getElementById('notification-high-score');
     if(getHighestScore===-1){
         holder.innerHTML = '<h4>Play The Game</h4>';
@@ -51,10 +52,25 @@ function getHighestScore(){
     if (scoresText) {
         leaderScores = JSON.parse(scoresText);
         console.log(leaderScores);
-        if(leaderScores.length<=0){
-            return -1;
+        switch(leaderScores.length){
+            case(0):
+                return -1;
+            case(1):
+                tempScore=leaderScores[0].score;
+                break;
+            case(2):
+                tempScore=leaderScores[1].score;
+                break;
+            case(3):
+                tempScore=leaderScores[2].score;
+                break;
+            case(4):
+                tempScore=leaderScores[3].score;
+                break;
+            case(5):
+                tempScore=leaderScores[4].score;
+                break;
         }
-        tempScore=leaderScores[4].score;
     }
     else{
         return -1;
@@ -355,6 +371,7 @@ function playGame(){
             requestAnimationFrame(animate);
             }
             if(gameover){
+                console.log("new score: "+score.toFixed(0))
                 addFromGame(score.toFixed(0));
                 currently_running=false;
                 // Let other players know the game has concluded
@@ -365,6 +382,83 @@ function playGame(){
         animate(0);
     }
     
+}
+
+function addFromGame(newScore){
+    
+    console.log(newScore);
+    //save score to user list in local storage
+    let scores = [];
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+        scores = JSON.parse(scoresText);
+    }
+    scores = this.updateScores(newScore, scores);
+    console.log(scores)
+
+    localStorage.setItem('scores', JSON.stringify(scores));
+
+    //update the highscores list
+    sendNewScore(newScore);
+    
+
+}
+
+async function sendNewScore(score) {
+    if(loadUsername){
+        const userName = localStorage.getItem('username');
+        
+    }
+    const newScore = {score: score};
+
+    try {
+        const response = await fetch('/api/leaderScore', {
+        method: 'POST',
+        headers: {'content-type': 'application/json'},
+        body: JSON.stringify(newScore),
+        });
+       
+
+        //loadLeaderScores();
+        getHighestScore();
+    } catch(error) {
+        console.error(error);
+        //don't update
+    }
+}
+
+function updateScores(score) {
+"use strict";
+console.log(score);
+let scores = [];
+const scoresText = localStorage.getItem('scores');
+if (scoresText) {
+  scores = JSON.parse(scoresText);
+}
+const newScore={score : score}
+
+let found = false;
+
+for (const [i, prevScore] of scores.entries()) {
+    console.log("Times "+i)
+    console.log(newScore.score+" "+prevScore.score);
+    if (parseInt(newScore.score, 10) > parseInt(prevScore.score, 10)) {
+        console.log(newScore.score+" "+prevScore.score);
+        scores.splice(i, 0, newScore);
+        found = true;
+        break;
+    }
+}
+console.log(scores);
+if (!found) {
+    scores.push(newScore);
+}
+
+if (scores.length > 5) {
+scores.pop();
+}
+
+return scores;
 }
 
 function configureWebSocket() {
@@ -407,81 +501,7 @@ function configureWebSocket() {
     this.socket.send(JSON.stringify(event));
   }
 
-function addFromGame(newScore){
-    
-    console.log(newScore);
-    //save score to user list in local storage
-    let scores = [];
-    const scoresText = localStorage.getItem('scores');
-    if (scoresText) {
-        scores = JSON.parse(scoresText);
-    }
-    scores = this.updateScores(newScore, scores);
-    console.log(scores)
 
-    localStorage.setItem('scores', JSON.stringify(scores));
-
-    //update the highscores list
-    sendNewScore(newScore);
-    
-
-}
-
-async function sendNewScore(score) {
-    if(loadUsername){
-        const userName = localStorage.getItem('username');
-        const newScore = {score: score};
-    }
-
-    try {
-        const response = await fetch('/api/leaderScore', {
-        method: 'POST',
-        headers: {'content-type': 'application/json'},
-        body: JSON.stringify(newScore),
-        });
-
-        loadLeaderScores();
-        getHighestScore();
-    } catch {
-        //don't update
-        //this.updateScoresLocal(newScore);
-    }
-}
-
-
-function updateScores(score) {
-"use strict";
-console.log(score);
-let scores = [];
-const scoresText = localStorage.getItem('scores');
-if (scoresText) {
-  scores = JSON.parse(scoresText);
-}
-const newScore={score : score}
-
-let found = false;
-
-for (const [i, prevScore] of scores.entries()) {
-    console.log("Times "+i)
-    console.log(newScore.score+" "+prevScore.score);
-    if (parseInt(newScore.score, 10) > parseInt(prevScore.score, 10)) {
-        console.log(newScore.score+" "+prevScore.score);
-        scores.splice(i, 0, newScore);
-        found = true;
-        break;
-    }
-}
-console.log(scores);
-if (!found) {
-    scores.push(newScore);
-}
-
-if (scores.length > 5) {
-scores.pop();
-}
-
-return scores;
-}
 
     
 

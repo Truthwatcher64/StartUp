@@ -112,8 +112,9 @@ apiRouter.get('/leaderScores', async (req, res)=>{
 
 // SubmitScore
 apiRouter.post('/leaderScore', async (req, res) => {
+  console.log("Success getting here");
   allScores= await DB.findScores();
-  console.log(allScores);
+  console.log("Called from database: "+allScores);
   scores = updateLeaderScores(req.body, allScores);
   await DB.saveScores(scores);
   allScores= await DB.findScores();
