@@ -5,23 +5,28 @@ window.addEventListener('load', loadNotification());
 
 function loadNotification(){
     let holder = document.getElementById('notification-high-score');
-    let temp = getHighestScore();
-    console.log("To output: "+temp);
-    temp=parseInt(temp, 10);
-    if(temp>0 && temp!=null){
-        if(temp == -1){
-            holder.innerHTML = '<h4>Play The Game</h4>';
-        }
-        
-        else{
-            holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>';
-        }
-    }
-    else if(temp === -2 && temp != null){
-        holder.innerHTML ='<h4>You have the high score! Good Job.</h4>';
+    if(getHighestScore===-1){
+        holder.innerHTML = '<h4>Play The Game</h4>';
     }
     else{
-        holder.innerHTML = '<h4>Play The Game</h4>';
+        let temp = getHighestScore();
+        console.log("To output: "+temp);
+        temp=parseInt(temp, 10);
+        if(temp>0 && temp!=null){
+            if(temp == -1){
+                holder.innerHTML = '<h4>Play The Game</h4>';
+            }
+            
+            else{
+                holder.innerHTML = '<h4>The next highest score is '+temp+'. Go try to beat it!</h4>';
+            }
+        }
+        else if(temp === -2 && temp != null){
+            holder.innerHTML ='<h4>You have the high score! Good Job.</h4>';
+        }
+        else{
+            holder.innerHTML = '<h4>Play The Game</h4>';
+        }
     }
 
     configureWebSocket();
@@ -45,6 +50,10 @@ function getHighestScore(){
     let scoresText = localStorage.getItem('leaderScores');
     if (scoresText) {
         leaderScores = JSON.parse(scoresText);
+        console.log(leaderScores);
+        if(leaderScores.length<=0){
+            return -1;
+        }
         tempScore=leaderScores[4].score;
     }
     else{
@@ -103,7 +112,7 @@ function getPlayerName() {
 
 function playGame(){
     // Let other players know a new game has started
-    this.broadcastEvent(this.getPlayerName(), GameStartEvent, {});
+    broadcastEvent(getPlayerName(), GameStartEvent, {});
 
     let currently_running=false;
         if(currently_running){
@@ -350,7 +359,7 @@ function playGame(){
                 currently_running=false;
                 // Let other players know the game has concluded
                 console.log(score.toFixed(0))
-                this.broadcastEvent(getPlayerName(), GameEndEvent, parseInt(score.toFixed(0)));
+                broadcastEvent(getPlayerName(), GameEndEvent, parseInt(score.toFixed(0)));
             }
         }
         animate(0);

@@ -97,5 +97,9 @@ I added login functionality that stores usernames in a mongo database.
 - Each user gets a authToken cookie when they are signed in
 
 ## WebSocket Deliverable
+I added Websocket functionality that allows users to recieve messages from other users through the server
+
+- Each time a user start a game a notification is displayed
+- Each time a user finishes their score is displayed
 
 ## React Deliverable
