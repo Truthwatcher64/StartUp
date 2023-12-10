@@ -16,6 +16,13 @@ main {
   align-items: center;
   justify-content: space-around;
 }
+.container-fluid {
+  background-color: #283aa0;
+}
+
+.nav-item{
+  font-size: larger;
+}
 
 footer {
   flex: 0 30px;
@@ -27,11 +34,13 @@ menu {
   /*  overwrite Bootstrap so the menu does not wrap */
   flex-direction: row !important;
   list-style: none;
+  
 }
 
 .navbar-brand {
   padding-left: 0.3em;
   border-bottom: solid rgb(182, 182, 182) thin;
+  
 }
 
 menu .nav-item {
