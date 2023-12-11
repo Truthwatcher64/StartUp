@@ -8,7 +8,6 @@ export function Game(props) {
       <div>
         {RaptorGame()}
       </div>
-      <div>Game Page</div>
     </main>
     </div>
   );
