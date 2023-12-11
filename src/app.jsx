@@ -23,22 +23,22 @@ function App() {
           </div>
           <menu className='navbar-nav'>
             <li className='nav-item'>
-              <a className='nav-link' href='index.html'>
+              <a className='nav-link' href='/'>
                 Home
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='play.html'>
+              <a className='nav-link' href='game'>
                 Game
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='scores.html'>
+              <a className='nav-link' href='scores'>
                 Scores
               </a>
             </li>
             <li className='nav-item'>
-              <a className='nav-link' href='about.html'>
+              <a className='nav-link' href='about'>
                 About
               </a>
             </li>
