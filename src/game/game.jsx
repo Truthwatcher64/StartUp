@@ -1,14 +1,15 @@
 import React from 'react';
-
-// import { Players } from './players';
-// import { SimonGame } from './simonGame';
+import { RaptorGame } from './canvas-game';
 
 export function Game(props) {
   return (
+    <div>
     <main className='bg-secondary'>
-      {/* <Players userName={props.userName} />
-      <SimonGame userName={props.userName} /> */}
+      <div>
+        {RaptorGame()}
+      </div>
       <div>Game Page</div>
     </main>
+    </div>
   );
 }

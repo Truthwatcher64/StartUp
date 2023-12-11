@@ -1,0 +1,17 @@
+.body {
+    flex-direction: column;
+
+}
+
+.picture-box {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.flex-box-login {
+    display: flex;
+    flex-direction: column;
+    flex: 10;
+    margin-bottom: 100px;
+}

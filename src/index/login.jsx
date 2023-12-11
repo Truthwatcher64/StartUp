@@ -3,6 +3,7 @@ import React from 'react';
 import { Unauthenticated } from './unauthenticated.jsx';
 import { Authenticated } from './authenticated';
 import { AuthState } from './authState';
+import './login.css'
 
 export function Login({ userName, authState, onAuthChange }) {
     const [imageUrl, setImageUrl] = React.useState('');
@@ -27,10 +28,9 @@ export function Login({ userName, authState, onAuthChange }) {
     }
 
   return (
-    <div>
+    <div className='flex-box-login'>
     <main className='container-fluid bg-secondary text-center'>
       <div>
-        {authState !== AuthState.Unknown && <h1>Welcome to Simon</h1>}
         {authState === AuthState.Authenticated && (
           <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />
         )}

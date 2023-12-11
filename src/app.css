@@ -10,7 +10,7 @@ header {
 }
 
 main {
-  flex: 1;
+  flex: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
