@@ -25,6 +25,7 @@ main {
 }
 
 footer {
+  margin-top: auto;
   flex: 0 30px;
 }
 
