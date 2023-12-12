@@ -103,3 +103,6 @@ I added Websocket functionality that allows users to recieve messages from other
 - Each time a user finishes their score is displayed
 
 ## React Deliverable
+The site now uses React web framework to render all elements and allow for interactivity
+
+- Vite can be used for frontend tooling
