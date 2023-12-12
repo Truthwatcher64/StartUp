@@ -11,60 +11,54 @@ export function Scores() {
   React.useEffect(() => {
     fetch('/api/leaderScores')
       .then((response) => response.json())
-      .then((scores) => {
-        setScores(scores);
+      .then((topScores) => {
+        setTopScores(topScores);
         localStorage.setItem('leaderScores', JSON.stringify(scores));
       })
       .catch(() => {
         const scoresText = localStorage.getItem('leaderScores');
         if (scoresText) {
-          setScores(JSON.parse(scoresText));
+          setTopScores(JSON.parse(scoresText));
         }
       });
   }, []);
 
 
+   // Demonstrates rendering an array with React
+   let topScoreRows = [];
 
-  // Demonstrates rendering an array with React
-  let scoreRows = [];
-
-  if (scores.length) {
-    for (const [i, score] of scores.entries()) {
-      scoreRows.push(
-        <tr key={i}>
-          <td>{i}</td>
-          <td>{score.score}</td>
-        </tr>
-      );
-    }
-  } else {
-    scoreRows.push(
-      <tr key='0'>
-        <td colSpan='4'>Be the first to score</td>
-      </tr>
-    );
-  }
+   if (topScores.length) {
+     for (const [i, score] of topScores.entries()) {
+       topScoreRows.push(
+         <tr key={i}>
+           <td>{i+1}</td>
+           <td>{score.score}</td>
+         </tr>
+       );
+     }
+   } else {
+     topScoreRows.push(
+       <tr key='0'>
+         <td colSpan='4'>Be the first to score</td>
+       </tr>
+     );
+   }
 
 
   return (
-    <main className='container-fluid bg-secondary text-center'>
-      <table className='table table-warning table-striped-columns'>
-        <thead className='table-dark'>
-          <tr>
-            <th>#</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody id='scores'>{scoreRows}</tbody>
-      </table>
-      <table className='table table-warning table-striped-columns'>
-        <thead className='table-dark'>
-          <tr>
-            <th>#</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-      </table>
-    </main>
+<div id='center-page' style={{ textAlign: 'center', marginTop: '50px' }}>
+        <p>Best Scores of All Time</p>
+        <main className='container-fluid bg-secondary text-center'>
+        <table className='table table-warning table-striped-columns' style={{ maxWidth: '500px' }}>
+            <thead className='table-dark'>
+            <tr>
+                <th>#</th>
+                <th>Score</th>
+            </tr>
+            </thead>
+            <tbody id='leaderScores'>{topScoreRows}</tbody>
+        </table>
+        </main>
+    </div>
   );
 }

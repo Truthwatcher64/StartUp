@@ -308,7 +308,7 @@ export function RaptorGame(){
                         this.x=0;
                         this.y=0;
                         this.width=2000;
-                        this.height=350;
+                        this.height=500;
                     }
                     draw(context){
                         context.fillStyle = 'white';
@@ -526,8 +526,8 @@ export function RaptorGame(){
 
     return (
         <div>
-            <Button className='startButton' onClick={playGame}>Start Game</Button>
-            <p id="notification-high-score" className="flex-item" style={{ textAlign: 'left', margin: '5px' }}></p>
+            <p id="notification-high-score" className="flex-item" style={{ textAlign: 'left', margin: '10px' }}></p>
+            <Button className='startButton' onClick={playGame} style={{ marginBottom: '20px' }}>Start Game</Button>
             
             <div id='game-sidebar'>
             <canvas ref={canvasRef} width={1000} height={500} style={{ border: '1px solid #000' }}></canvas>

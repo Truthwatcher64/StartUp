@@ -9,7 +9,7 @@ export function About(props) {
   return (
     <main className='container-fluid bg-secondary text-center'>
       <div>
-        <div id='picture' className='picture-box'>
+        <div id='picture' className='picture-box' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingRight: '50px'}}>
           {imgEl}
         </div>
 
