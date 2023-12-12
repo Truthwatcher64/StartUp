@@ -15,7 +15,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className='body bg-dark text-light'>
+    <div className='body bg-secondary text-light'>
       <header className='container-fluid'>
         <nav className='navbar fixed-top navbar-dark'>
           <div className='navbar-brand'>

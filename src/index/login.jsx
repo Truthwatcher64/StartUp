@@ -28,7 +28,7 @@ export function Login({ userName, authState, onAuthChange }) {
     }
 
   return (
-    <div className='flex-box-login'>
+    <div className='flex-box-login bg-secondary'>
     <main className='container-fluid bg-secondary text-center'>
       <div>
         {authState === AuthState.Authenticated && (
