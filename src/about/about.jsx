@@ -1,9 +1,10 @@
 import React from 'react';
 import './about.css';
+import raptorImage from '/Assets/raptor_1.png'
 
 export function About(props) {
 
-  let imgEl = <img alt="raptor" src="/assets/raptor_1.png" width="400" height="250" className="RaptorPng"/>;
+  let imgEl = <img alt="raptor" src={raptorImage} width="400" height="250" className="RaptorPng"/>;
   
 
   return (

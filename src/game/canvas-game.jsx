@@ -2,9 +2,10 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import './game.css'
 import { useState, useEffect, useRef } from 'react';
-import raptorImage from '../../assets/raptor_1.png'
-import raptorImage2 from '../../assets/raptor_2.png'
-import backgroundWhite from '../../assets/background.png'
+import raptorImage from '/Assets/raptor_1.png'
+import raptorImage2 from '/Assets/raptor_2.png'
+import backgroundWhite from 'Assets/background.png'
+import rock from '/Assets/rock.png'
 
 export function RaptorGame(){
         let notificationList=  <p id="other-users" className="flex-item" style={{ textAlign: 'left', margin: '5px' }}></p>
@@ -203,7 +204,7 @@ export function RaptorGame(){
                         this.y = this.gameheight - this.height;
                         //this.image= raptorImage
                         this.image=new Image()
-                        this.image.src='../../assets/raptor_1.png'
+                        this.image.src=raptorImage
                         this.image.onload = () => {
                            
                           };
@@ -213,7 +214,7 @@ export function RaptorGame(){
                         if(this.image){
                             console.log("Loaded Raptor1 Properly");
                         }
-                        this.image2=new Image()
+                        this.image2=new Image
                         this.image2.src= raptorImage2
                         this.image2.onload= ()=>{
 
@@ -325,8 +326,8 @@ export function RaptorGame(){
                         this.height = randomSize;
                         this.image=new Image()
 
-                        this.image.src = '../../assets/rock.png'
-                        this.x=this.gamewidth
+                        this.image.src = rock;
+                        this.x=this.gamewidth;
                         this.y=this.gameheight-this.height;
                         this.speed=5;
                         let markedForDeletion=false;
