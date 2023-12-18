@@ -12,6 +12,7 @@ Ports
 - Caddy acts as a gateway to split off of one entry port
 - 80 http
 - 443 https
+- 22 ssh
 
 Error
 - 300 error, redirection message, address changed, or redirect
@@ -32,6 +33,20 @@ Cookies
 
 Websockets
 - asdf
+
+Node
+- allows javascript to be run outside of a browser
+- adds functionality to the project, has javascript on the front and back end
+- allows for easy use of node packages, from npm
+- package.json, metadata, commands, required packages list
+- node_modules, folder with all the dependencies
+- package-lock.json, has the versions of each package
+
+Vite
+- real time code deployment
+- builds projects, bundling
+- toolchain
+- polyfill, transpiler, minifies
 
 CSS 
 - button, all buttons
