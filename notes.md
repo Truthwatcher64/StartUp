@@ -7,7 +7,31 @@
 ## Smaller
 
 ### Not So Big
+HTTP
+Ports
+- Caddy acts as a gateway to split off of one entry port
+- 80 http
+- 443 https
 
+Error
+- 300 error, redirection message, address changed, or redirect
+- 400 error, client problem, authentication, blocked access, bad request
+- 500 error, serverside error,
+
+Headers
+- content type tells the browser what is in the body usually text/html or application/json
+
+Express/DB
+- store passwords with hash and salt, bcrypt
+
+Cookies
+- SameSite, None: cookie goes everywhere, strict: only to top-level
+- HTTPOnly, only can be accessed by the server, no javscript can read or edit it
+- Path, path for valid requests
+- Domain, domain and subdomain of the cookies
+
+Websockets
+- asdf
 
 CSS 
 - button, all buttons
