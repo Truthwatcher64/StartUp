@@ -3,6 +3,7 @@
 
 ## Description Deliverable
 
+View the project (here)[https://startup.spinnerserver.click/]
 
 ### Elevator Pitch
 This is going to be like the dino game that works on chrome, but better. The base level 
